@@ -1,3 +1,21 @@
+# React Complete Guide
+
+## Quick Start Guide
+
+```
+# Windows
+npm install -g create-react-app
+# Mac
+sudo npm install -g create-react-app
+
+# Create a project
+create-react-app react-complete-guide
+cd react-complete-guide
+
+# Start the App
+npm start
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
