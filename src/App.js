@@ -1,7 +1,6 @@
 import React, { Component } from "react"; //Component, useState
 //import logo from "./logo.svg";
-import "./App.css";
-import "./person/Person.css";
+import styles from "./App.module.css";
 import Person from "./person/Person";
 
 class App extends Component {
@@ -51,15 +50,9 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "white",
-      font: "inherit",
-      border: "2x solid blue",
-      padding: "8px",
-      cursor: "pointer"
-    };
-
     let persons = null;
+    let btnClass = '';
+    
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -72,20 +65,33 @@ class App extends Component {
                 key={person.id}
                 id={person.id}
                 changed={event =>
-                  this.nameChangedHandler.bind(event, person.id)
+                  this.nameChangedHandler(event, person.id)
                 }
               />
             );
           })}
         </div>
       );
+
+      btnClass = styles.Red;
     }
 
+    const classes = [];
+    if (this.state.persons.length <= 1) {
+      classes.push(styles.fontRed);
+    }
+
+    if (this.state.persons.length === 0) {
+      classes.push(styles.fontBold);
+    }
+
+    console.log(classes.join(' '));
+
     return (
-      <div className="App">
+      <div className={styles.App}>
         <h1>Hi, I'm a React App</h1>
-        <p>This really works!!!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
+        <p className={classes.join(' ')}>This really works!!!</p>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>
           Toggle Names
         </button>
         {persons}
