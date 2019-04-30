@@ -1,25 +1,15 @@
 import React, { Component } from "react"; //Component, useState
-//import logo from "./logo.svg";
+//import logo from "../logo.svg";
 import styles from "./App.module.css";
-import Person from "./person/Person";
+import Person from "../components/person/Person";
 
 class App extends Component {
   state = {
     persons: [
-      { id: 1, name: "Michael", age: 38 },
-      { id: 2, name: "Stephanie", age: 28 }
+      { id: 100, name: "Michael", age: 38 },
+      { id: 200, name: "Stephanie", age: 28 }
     ],
     showPersons: false
-  };
-
-  switchNameHandler = newName => {
-    console.log("Was Clicked!");
-    this.setState({
-      persons: [
-        { id: 1, name: newName, age: 18 },
-        { id: 2, name: "Stephanie Girl", age: 28 }
-      ]
-    });
   };
 
   nameChangedHandler = (event, id) => {
@@ -29,7 +19,7 @@ class App extends Component {
 
     person.name = event.target.value;
 
-    const persons = [...this.state.persions];
+    const persons = [...this.state.persons];
     const index = persons.findIndex(p => p.id === id);
     persons[index] = person;
 
@@ -51,8 +41,8 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = '';
-    
+    let btnClass = "";
+
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -64,9 +54,7 @@ class App extends Component {
                 click={this.deletePersonHandler.bind(this, index)}
                 key={person.id}
                 id={person.id}
-                changed={event =>
-                  this.nameChangedHandler(event, person.id)
-                }
+                changed={event => this.nameChangedHandler(event, person.id)}
               />
             );
           })}
@@ -78,19 +66,19 @@ class App extends Component {
 
     const classes = [];
     if (this.state.persons.length <= 1) {
-      classes.push(styles.fontRed);
+      classes.push(styles.FontRed);
     }
 
     if (this.state.persons.length === 0) {
-      classes.push(styles.fontBold);
+      classes.push(styles.FontBold);
     }
 
-    console.log(classes.join(' '));
+    console.log(classes.join(" "));
 
     return (
       <div className={styles.App}>
         <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>This really works!!!</p>
+        <p className={classes.join(" ")}>This really works!!!</p>
         <button className={btnClass} onClick={this.togglePersonsHandler}>
           Toggle Names
         </button>

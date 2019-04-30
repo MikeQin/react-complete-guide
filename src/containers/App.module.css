@@ -29,12 +29,13 @@
   color: black;
 }
 
-.fontRed {
+.App p.FontRed {
   color: red;
 }
 
-.fontBold {
+.App p.FontBold {
   font-weight: bold;
+  font-size-adjust: inherit
 }
 
 .App-logo {
@@ -62,6 +63,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
