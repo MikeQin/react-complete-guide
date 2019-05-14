@@ -5,7 +5,7 @@ const person = props => {
   return (
     <div className={styles.Person}>
       <p>id: {props.id}</p>
-      <p onClick={props.click}>
+      <p onClick={props.clicked}>
         I'm {props.name}, and I am {props.age} years old.
       </p>
       <p>{props.children}</p>
