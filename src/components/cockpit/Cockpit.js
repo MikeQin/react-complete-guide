@@ -1,9 +1,19 @@
-import React from 'react';
-import cockpitStyles from './Cockpit.module.css'
+import React, { useEffect } from "react";
+import cockpitStyles from "./Cockpit.module.css";
 
-const cockpit = (props) => {
+const Cockpit = props => {
+  useEffect(() => {
+    console.log("[Cockpit.js] useEffect");
+    setTimeout(() => {
+      alert("Saved data to cloud!");
+    }, 1000);
 
-  let btnClass = '';
+    return () => {
+      console.log("[Cockpit.js] cleanup work runs in useEffect");
+    };
+  }, [props.persons]);
+
+  let btnClass = "";
   if (props.showPersons) {
     btnClass = cockpitStyles.Red;
   }
@@ -17,12 +27,12 @@ const cockpit = (props) => {
     classes.push(cockpitStyles.FontBold);
   }
 
-  console.log(classes.join(' '));
+  console.log(classes.join(" "));
 
   return (
     <div className={cockpitStyles.Cockpit}>
-      <h1>Hi, I'm a React App</h1>
-      <p className={classes.join(' ')}>This really works!!!</p>
+      <h1>{props.appTitle}</h1>
+      <p className={classes.join(" ")}>This really works!!!</p>
       <button className={btnClass} onClick={props.clicked}>
         Toggle Names
       </button>
@@ -30,4 +40,5 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+// Performance optimization: React.memo()
+export default React.memo(Cockpit);
