@@ -1,17 +1,48 @@
-import React from 'react';
-import Person from './Person';
+import React, { PureComponent } from "react";
+import Person from "./Person";
 
-const persons = props => props.persons.map((person, index) => {
-  return (
-    <Person
-      name={person.name}
-      age={person.age}
-      clicked={() => props.clicked(index)}
-      key={person.id}
-      id={person.id}
-      changed={event => props.changed(event, person.id)}
-    />
-  );
-});
+class Persons extends PureComponent {
+  //PureComponent does the check for all props
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("[Persons.js] shouldComponentUpdate");
+  //   // Performance optimization
+  //   if (nextProps.persons !== this.props.persons) {
+  //     return true;
+  //   }
 
-export default persons;
+  //   return false;
+  // }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log("[Persons.js] getSnapshotBeforeUpdate");
+
+    return { message: "Snapshot!" };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("[Persons.js] componentDidUpdate");
+    console.log(snapshot);
+  }
+
+  componentWillUnmount() {
+    console.log("[Persons.js] componentWillUnmount");
+  }
+
+  render() {
+    console.log("[Persons.js] rendering ...");
+    return this.props.persons.map((person, index) => {
+      return (
+        <Person
+          name={person.name}
+          age={person.age}
+          clicked={() => this.props.clicked(index)}
+          key={person.id}
+          id={person.id}
+          changed={event => this.props.changed(event, person.id)}
+        />
+      );
+    });
+  }
+}
+
+export default Persons;
