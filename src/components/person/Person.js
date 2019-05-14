@@ -1,17 +1,28 @@
-import React from "react";
-import styles from "./Person.module.css";
+import React, { Component, Fragment } from "react";
+//import styles from "./Person.module.css";
 
-const person = props => {
-  return (
-    <div className={styles.Person}>
-      <p>id: {props.id}</p>
-      <p onClick={props.clicked}>
-        I'm {props.name}, and I am {props.age} years old.
-      </p>
-      <p>{props.children}</p>
-      <input type="text" onChange={props.changed} value={props.name} />
-    </div>
-  );
-};
+class Person extends Component {
+  componentWillUnmount() {
+    console.log("[Person.js] componentWillUnmount");
+  }
 
-export default person;
+  render() {
+    console.log("[Person.js] rendering ...");
+    return (
+      <Fragment>
+        <p>id: {this.props.id}</p>
+        <p onClick={this.props.clicked}>
+          I'm {this.props.name}, and I am {this.props.age} years old.
+        </p>
+        <p>{this.props.children}</p>
+        <input
+          type="text"
+          onChange={this.props.changed}
+          value={this.props.name}
+        />
+      </Fragment>
+    );
+  }
+}
+
+export default Person;
